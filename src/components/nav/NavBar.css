@@ -1,0 +1,18 @@
+.navbar {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    list-style-type: none;
+    align-items: center;
+    border: 4px ridge black;
+}
+
+/* .navbar__item {
+    flex-basis: 20%;
+    list-style-type: none;
+}
+
+.navbar__logout {
+    margin-left: auto;
+} */

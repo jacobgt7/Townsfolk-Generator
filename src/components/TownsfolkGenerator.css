@@ -1,0 +1,18 @@
+@font-face {
+    font-family: YeOldPixel;
+    src: url(alagard.ttf);
+}
+
+@font-face {
+    font-family: pixel;
+    src: url(Minecraft.ttf);
+}
+
+body {
+    font-family: pixel;
+}
+
+
+h1 {
+    font-family: YeOldPixel;
+}
