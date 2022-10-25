@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { NewVillage } from "./NewVillage"
 import { Link } from "react-router-dom"
 import villageIcon from "./villageIcon.png"
+import "./MyVillages.css"
 
 export const MyVillages = () => {
 
@@ -30,7 +31,7 @@ export const MyVillages = () => {
 
 
     return <>
-        <h1>My Villages</h1>
+        <h1 className="page_header">My Villages</h1>
 
         <NewVillage getVillages={getVillages} townsfolkUserObject={townsfolkUserObject} />
 
@@ -38,18 +39,21 @@ export const MyVillages = () => {
             {
                 villages.map(
                     village => {
-                        return <div className="village" key={`village--${village.id}`}>
-                            <Link to={`/village/${village.id}`} >
-                                <img src={villageIcon} />
-                                <h4>{village.name}</h4>
-                            </Link>
-                        </div>
+                        return <Link to={`/village/${village.id}`} key={`village--${village.id}`} className="village">
+                            <img src={villageIcon} alt="village icon" className="village__icon" />
+                            <h4>{village.name}</h4>
+                        </Link>
+
                     }
                 )
             }
         </section>
 
-        <footer className="attribute"><a href="https://www.flaticon.com/free-icons/village" title="village icons">Village icons created by Freepik - Flaticon</a></footer>
+        <footer className="attribute">
+            <div>
+                <a href="https://www.flaticon.com/free-icons/village" title="village icons">Village icons created by Freepik - Flaticon</a>
+            </div>
+        </footer>
 
     </>
 }

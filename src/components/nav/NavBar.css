@@ -6,13 +6,5 @@
     list-style-type: none;
     align-items: center;
     border: 4px ridge black;
+    margin: 10px;
 }
-
-/* .navbar__item {
-    flex-basis: 20%;
-    list-style-type: none;
-}
-
-.navbar__logout {
-    margin-left: auto;
-} */

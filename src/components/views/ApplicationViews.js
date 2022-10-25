@@ -1,5 +1,6 @@
 import { Routes, Route, Outlet } from "react-router-dom"
 import { MyVillages } from "../villages/MyVillages"
+import { VillageDetails } from "../villages/VillageDetails"
 
 export const ApplicationViews = () => {
 
@@ -11,7 +12,7 @@ export const ApplicationViews = () => {
             } >
 
                 <Route path="villages" element={<MyVillages />} />
-                <Route path="village/:villageId" element={<></>} />
+                <Route path="village/:villageId" element={<VillageDetails />} />
             </Route>
         </Routes>
 
