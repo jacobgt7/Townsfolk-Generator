@@ -10,6 +10,14 @@
 
 body {
     font-family: pixel;
+    letter-spacing: 0.1rem;
+}
+
+button {
+    font-family: pixel;
+    letter-spacing: 0.1rem;
+    padding: 5px;
+    margin: 5px;
 }
 
 
