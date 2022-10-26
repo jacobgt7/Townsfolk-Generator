@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const NewCharacter = ({ village, getCharacters }) => {
+export const NewCharacter = ({ villageId, getCharacters }) => {
 
     const [newCharacter, setNewCharacter] = useState({
         name: "",
@@ -8,7 +8,7 @@ export const NewCharacter = ({ village, getCharacters }) => {
         imgURL: "",
         profession: "",
         background: "",
-        villageId: village.id
+        villageId: parseInt(villageId)
 
     })
     const [genders, setGenders] = useState([])
@@ -47,16 +47,24 @@ export const NewCharacter = ({ village, getCharacters }) => {
             .then(() => {
                 getCharacters()
                 setShowCharacterForm(false)
+                setNewCharacter({
+                    name: "",
+                    genderId: 0,
+                    imgURL: "",
+                    profession: "",
+                    background: "",
+                    villageId: parseInt(villageId)
+                })
             })
 
     }
 
 
     return <>
-        <section className="newCharacterForm">
+        <section className="newCharacterFormContainer">
             {
                 showCharacterForm ? <>
-                    <form>
+                    <form className="newCharacterForm">
                         <fieldset>
                             <label htmlFor="newCharacterName">
                                 Name

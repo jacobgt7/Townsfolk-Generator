@@ -5,6 +5,8 @@ import { CharacterInfo } from "../characters/CharacterInfo"
 import { CharacterList } from "../characters/CharacterList"
 import { NewCharacter } from "../characters/NewCharacter"
 import { DeleteVillage } from "./DeleteVillage"
+import "./VillageDetails.css"
+import villageDetailsPic from "./villageDetailsPic.png"
 
 
 export const VillageDetails = () => {
@@ -19,10 +21,11 @@ export const VillageDetails = () => {
         userId: townsfolkUserObject.id
     })
     const [characters, setCharacters] = useState([])
+    const [selectedCharacter, setSelectedCharacter] = useState(null)
     const [editName, setEditName] = useState(false)
 
     const getCharacters = () => {
-        fetch(`http://localhost:8088/characters?villageId=${villageId}`)
+        fetch(`http://localhost:8088/characters?villageId=${villageId}&_expand=gender`)
             .then(res => res.json())
             .then((charactersArray) => {
                 setCharacters(charactersArray)
@@ -61,7 +64,7 @@ export const VillageDetails = () => {
 
     return <>
         <div className="villageDetailsMainContainer">
-            <NewCharacter village={village} getCharacters={getCharacters} />
+            <NewCharacter villageId={villageId} getCharacters={getCharacters} />
 
             <div className="villageDetailsInnerContainer">
                 <div className="villageNameContainer">
@@ -85,14 +88,14 @@ export const VillageDetails = () => {
                     }
                 </div>
 
-                <DeleteVillage />
+                <DeleteVillage villageId={villageId} characters={characters} />
 
-                <img className="villageImg" />
+                <img className="villageImg" src={villageDetailsPic} alt="pixel art of a village" />
 
-                <CharacterList />
+                <CharacterList characters={characters} setSelectedCharacter={setSelectedCharacter} />
             </div>
 
-            <CharacterInfo />
+            <CharacterInfo selectedCharacter={selectedCharacter} />
         </div>
     </>
 
