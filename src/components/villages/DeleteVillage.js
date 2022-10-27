@@ -30,10 +30,10 @@ export const DeleteVillage = ({ villageId, characters }) => {
         {
             showConfirmationDelete ? <>
                 Are you sure?
-                <button onClick={handleDelete}>Yes!</button>
+                <button className="delete" onClick={handleDelete}>Yes!</button>
                 <button onClick={() => { setShowConfirmationDelete(false) }}>No! Wait!</button>
             </>
-                : <button onClick={() => { setShowConfirmationDelete(true) }}>Delete Village</button>
+                : <button className="delete" onClick={() => { setShowConfirmationDelete(true) }}>Delete Village</button>
         }
     </div>
 }
