@@ -100,6 +100,12 @@ export const getGenders = () => {
         .then(res => res.json())
 }
 
+export const getRandomProfession = () => {
+    const randomInteger = Math.ceil(Math.random() * 42) //there are 42 objects in the professions array
+    return fetch(`http://localhost:8088/professions/${randomInteger}`)
+        .then(res => res.json())
+}
+
 export const getRandomUser = (API) => {
     return fetch(API)
         .then(res => res.json())
