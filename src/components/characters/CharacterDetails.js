@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { CharacterDetailsDisplay } from "./CharacterDetailsDisplay"
 import { CharacterDetailsEdit } from "./CharacterDetailsEdit"
 import "./CharacterDetails.css"
+import { deleteCharacter, getCharacter, getGenders, replaceCharacter } from "../ApiManager"
 
 export const CharacterDetails = () => {
 
@@ -14,22 +15,18 @@ export const CharacterDetails = () => {
     const [genders, setGenders] = useState([])
     const [character, setCharacter] = useState({})
 
-    const getCharacter = () => {
-        fetch(`http://localhost:8088/characters/${characterId}?_expand=gender`)
-            .then(res => res.json())
-            .then((characterObj) => {
-                setCharacter(characterObj)
 
-            })
-    }
 
     useEffect(
         () => {
 
-            getCharacter()
+            getCharacter(characterId)
+                .then((characterObj) => {
+                    setCharacter(characterObj)
 
-            fetch(`http://localhost:8088/genders`)
-                .then(res => res.json())
+                })
+
+            getGenders()
                 .then((gendersArray) => {
                     setGenders(gendersArray)
                 })
@@ -80,17 +77,13 @@ export const CharacterDetails = () => {
     const handleSave = (event) => {
         event.preventDefault()
 
-        fetch(`http://localhost:8088/characters/${characterId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(editedCharacter)
-        }
-        )
-            .then(res => res.json())
+        replaceCharacter(characterId, editedCharacter)
             .then(() => {
-                getCharacter()
+                getCharacter(characterId)
+                    .then((characterObj) => {
+                        setCharacter(characterObj)
+
+                    })
                 setEditMode(false)
             })
     }
@@ -98,10 +91,7 @@ export const CharacterDetails = () => {
     const handleDelete = (event) => {
         event.preventDefault()
 
-        fetch(`http://localhost:8088/characters/${characterId}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
+        deleteCharacter(character)
             .then(() => {
                 navigate(`/village/${character.villageId}`)
             })

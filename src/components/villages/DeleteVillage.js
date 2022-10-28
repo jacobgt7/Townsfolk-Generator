@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { deleteCharacter, deleteVillage } from "../ApiManager"
 
 export const DeleteVillage = ({ villageId, characters }) => {
 
@@ -10,16 +11,11 @@ export const DeleteVillage = ({ villageId, characters }) => {
     const handleDelete = () => {
         characters.forEach(
             character => {
-                fetch(`http://localhost:8088/characters/${character.id}`, {
-                    method: "DELETE"
-                })
+                deleteCharacter(character)
             }
         )
 
-        fetch(`http://localhost:8088/villages/${villageId}`, {
-            method: "DELETE"
-        })
-            .then(res => res.json())
+        deleteVillage(villageId)
             .then(() => {
                 navigate("/villages")
             })
