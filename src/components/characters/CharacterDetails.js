@@ -116,7 +116,7 @@ export const CharacterDetails = () => {
             {
                 editMode ? <>
                     <button onClick={handleCancel}>Cancel</button>
-                    <button onClick={handleSave} >Save</button>
+                    <button disabled={!editedCharacter.name} onClick={handleSave} >Save</button>
                     <button className="delete" onClick={handleDelete} >Delete</button>
                 </>
                     : <>

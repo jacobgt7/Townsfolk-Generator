@@ -148,7 +148,8 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
                             <button onClick={handleRandomProfessionButton} >Random</button>
                         </fieldset>
 
-                        <button onClick={handleCreateButtonClick}>Create</button>
+                        <button disabled={!newCharacter.name || !newCharacter.genderId}
+                            onClick={handleCreateButtonClick}>Create</button>
                     </form>
                 </>
                     :

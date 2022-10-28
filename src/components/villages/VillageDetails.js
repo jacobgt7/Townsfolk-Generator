@@ -69,7 +69,7 @@ export const VillageDetails = () => {
                                         setVillage(copy)
                                     }
                                 } />
-                                <button onClick={handleSaveNameButton}>Save</button>
+                                <button disabled={!village.name} onClick={handleSaveNameButton}>Save</button>
                             </>
                             :
                             <>
