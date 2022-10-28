@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getGenders, getRandomUser, addCharacter } from "../ApiManager"
+import { getGenders, getRandomUser, addCharacter, getRandomProfession } from "../ApiManager"
 
 export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
 
@@ -56,6 +56,17 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
                 setNewCharacter(copy)
             })
 
+    }
+
+    const handleRandomProfessionButton = (event) => {
+        event.preventDefault()
+
+        getRandomProfession()
+            .then((professionObj) => {
+                const copy = { ...newCharacter }
+                copy.profession = professionObj.name
+                setNewCharacter(copy)
+            })
     }
 
 
@@ -134,6 +145,7 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
                                     name="profession"
                                     onChange={handleUserInputText} />
                             </label>
+                            <button onClick={handleRandomProfessionButton} >Random</button>
                         </fieldset>
 
                         <button onClick={handleCreateButtonClick}>Create</button>
