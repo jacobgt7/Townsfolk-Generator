@@ -7,6 +7,7 @@ import { NewCharacter } from "../characters/NewCharacter"
 import { DeleteVillage } from "./DeleteVillage"
 import "./VillageDetails.css"
 import villageDetailsPic from "./villageDetailsPic.png"
+import { getCharacters, getVillage, replaceVillage } from "../ApiManager"
 
 
 export const VillageDetails = () => {
@@ -24,38 +25,28 @@ export const VillageDetails = () => {
     const [selectedCharacter, setSelectedCharacter] = useState(null)
     const [editName, setEditName] = useState(false)
 
-    const getCharacters = () => {
-        fetch(`http://localhost:8088/characters?villageId=${villageId}&_expand=gender`)
-            .then(res => res.json())
-            .then((charactersArray) => {
-                setCharacters(charactersArray)
-            })
-    }
+
+
+
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/villages/${villageId}`)
-                .then(res => res.json())
+            getVillage(villageId)
                 .then((villageObj) => {
                     setVillage(villageObj)
                 })
 
-            getCharacters()
+            getCharacters(villageId)
+                .then((charactersArray) => {
+                    setCharacters(charactersArray)
+                })
 
         },
         []
     )
 
     const handleSaveNameButton = () => {
-        fetch(`http://localhost:8088/villages/${villageId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(village)
-        }
-        )
-            .then(res => res.json())
+        replaceVillage(village)
             .then(() => {
                 setEditName(false)
             })
@@ -64,7 +55,7 @@ export const VillageDetails = () => {
 
     return <>
         <div className="villageDetailsMainContainer">
-            <NewCharacter villageId={villageId} getCharacters={getCharacters} />
+            <NewCharacter villageId={villageId} getCharacters={getCharacters} setCharacters={setCharacters} />
 
             <div className="villageDetailsInnerContainer">
                 <div className="villageNameContainer">

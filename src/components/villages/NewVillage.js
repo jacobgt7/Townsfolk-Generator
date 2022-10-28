@@ -1,6 +1,7 @@
 import { useState } from "react"
+import { addVillage } from "../ApiManager"
 
-export const NewVillage = ({ getVillages, townsfolkUserObject }) => {
+export const NewVillage = ({ getVillages, townsfolkUserObject, setVillages }) => {
 
     const [newVillage, setNewVillage] = useState({
         name: "",
@@ -16,17 +17,13 @@ export const NewVillage = ({ getVillages, townsfolkUserObject }) => {
     }
 
     const handleSaveButton = () => {
-        fetch(`http://localhost:8088/villages`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newVillage)
-        })
-            .then(res => res.json())
+        addVillage(newVillage)
             .then(() => {
-                getVillages()
-                setDisplayForm(false)
+                getVillages(townsfolkUserObject)
+                    .then((villagesArray) => {
+                        setVillages(villagesArray)
+                        setDisplayForm(false)
+                    })
             })
 
 

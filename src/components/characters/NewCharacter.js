@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
+import { getGenders, getRandomUser, addCharacter } from "../ApiManager"
 
-export const NewCharacter = ({ villageId, getCharacters }) => {
+export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
 
     const [newCharacter, setNewCharacter] = useState({
         name: "",
@@ -16,8 +17,7 @@ export const NewCharacter = ({ villageId, getCharacters }) => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/genders`)
-                .then(res => res.json())
+            getGenders()
                 .then((gendersArray) => {
                     setGenders(gendersArray)
                 })
@@ -35,26 +35,22 @@ export const NewCharacter = ({ villageId, getCharacters }) => {
     const handleRandomNameButton = (event) => {
         event.preventDefault()
 
-        let firstName = ""
-        let lastName = ""
-
         const selectedGender = newCharacter.genderId
 
-        let randomNameAPI = ""
+        let randomUserAPI = ""
 
         if (selectedGender === 1) {
-            randomNameAPI = "https://randomuser.me/api/?gender=male&nat=US"
+            randomUserAPI = "https://randomuser.me/api/?gender=male&nat=US"
         } else if (selectedGender === 2) {
-            randomNameAPI = "https://randomuser.me/api/?gender=female&nat=US"
+            randomUserAPI = "https://randomuser.me/api/?gender=female&nat=US"
         } else {
-            randomNameAPI = "https://randomuser.me/api/?nat=US"
+            randomUserAPI = "https://randomuser.me/api/?nat=US"
         }
 
-        fetch(randomNameAPI)
-            .then(res => res.json())
+        getRandomUser(randomUserAPI)
             .then((randomUserData) => {
-                firstName = randomUserData.results[0].name.first
-                lastName = randomUserData.results[0].name.last
+                const firstName = randomUserData.results[0].name.first
+                const lastName = randomUserData.results[0].name.last
                 const copy = { ...newCharacter }
                 copy.name = firstName + " " + lastName
                 setNewCharacter(copy)
@@ -66,35 +62,26 @@ export const NewCharacter = ({ villageId, getCharacters }) => {
     const handleCreateButtonClick = (event) => {
         event.preventDefault()
 
-        fetch(`http://localhost:8088/characters`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(newCharacter)
-        }
-        )
-            .then(res => res.json())
+        addCharacter(newCharacter)
             .then(() => {
-                getCharacters()
-                setShowCharacterForm(false)
-                setNewCharacter({
-                    name: "",
-                    genderId: 0,
-                    imgURL: "",
-                    profession: "",
-                    background: "",
-                    villageId: parseInt(villageId)
-                })
+                getCharacters(villageId)
+                    .then(charactersArray => {
+                        setCharacters(charactersArray)
+                        setShowCharacterForm(false)
+                        setNewCharacter({
+                            name: "",
+                            genderId: 0,
+                            imgURL: "",
+                            profession: "",
+                            background: "",
+                            villageId: parseInt(villageId)
+                        })
+                    })
             })
 
     }
 
-    //to do: random name assignment
-    //button on form
-    //fetches from api specifying gender and nation
-    //combine first and last name from data
-    //update newCharacter with combined name
+
     return <>
         <section className="newCharacterFormContainer">
             {

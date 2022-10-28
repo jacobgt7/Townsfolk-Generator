@@ -3,6 +3,8 @@ import { NewVillage } from "./NewVillage"
 import { Link } from "react-router-dom"
 import villageIcon from "./villageIcon.png"
 import "./MyVillages.css"
+import { getVillages } from "../ApiManager"
+
 
 export const MyVillages = () => {
 
@@ -11,17 +13,13 @@ export const MyVillages = () => {
     const localTownsfolkUser = localStorage.getItem("townsfolk_user")
     const townsfolkUserObject = JSON.parse(localTownsfolkUser)
 
-    const getVillages = () => {
-        fetch(`http://localhost:8088/villages?userId=${townsfolkUserObject.id}`)
-            .then(res => res.json())
-            .then((villagesArray) => {
-                setVillages(villagesArray)
-            })
-    }
 
     useEffect(
         () => {
-            getVillages()
+            getVillages(townsfolkUserObject)
+                .then((villagesArray) => {
+                    setVillages(villagesArray)
+                })
         },
         []
     )
@@ -33,7 +31,7 @@ export const MyVillages = () => {
     return <>
         <h1 className="page_header">My Villages</h1>
 
-        <NewVillage getVillages={getVillages} townsfolkUserObject={townsfolkUserObject} />
+        <NewVillage getVillages={getVillages} townsfolkUserObject={townsfolkUserObject} setVillages={setVillages} />
 
         <section className="villages">
             {
