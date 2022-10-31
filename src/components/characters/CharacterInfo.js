@@ -5,7 +5,7 @@ export const CharacterInfo = ({ selectedCharacter }) => {
     const navigate = useNavigate()
     //display info for selected character
     //A button for character details page
-    return <section className="characterInfo">
+    return <section className="characterInfo box">
         {
             selectedCharacter ? <>
                 <img src={selectedCharacter.imgURL} alt="pixel character avatar" className="characterAvatar" />

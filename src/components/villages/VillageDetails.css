@@ -5,10 +5,10 @@
 
 .newCharacterFormContainer {
     width: 12rem;
+    min-width: 12rem;
     height: 35rem;
     margin: 1rem;
     padding: 0.1rem;
-    border: 4px solid black;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,6 +23,7 @@
 .villageDetailsInnerContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .villageNameContainer {
@@ -31,8 +32,14 @@
     align-items: center;
 }
 
+.villageNameEdit {
+    font-size: xx-large;
+    font-family: YeOldPixel;
+}
+
 .deleteButtonsContainer {
     padding: 0.5rem;
+    align-self: flex-end;
 }
 
 .villageImg {
@@ -43,14 +50,19 @@
 
 .characters {
     display: flex;
-    flex-direction: row-reverse;
-    flex-wrap: wrap-reverse;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .character {
-    display: inline-block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     width: 7rem;
+    margin: 5px;
 }
 
 
@@ -60,8 +72,8 @@
 
 .characterInfo {
     width: 12rem;
+    min-width: 12rem;
     height: 35rem;
-    border: 4px solid black;
     padding: 0.1rem;
     margin: 1rem;
     display: flex;

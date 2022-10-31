@@ -62,7 +62,7 @@ export const VillageDetails = () => {
                     {
                         editName ?
                             <>
-                                <input type="text" value={village.name} onChange={
+                                <input className="villageNameEdit" type="text" value={village.name} onChange={
                                     (e) => {
                                         const copy = { ...village }
                                         copy.name = e.target.value

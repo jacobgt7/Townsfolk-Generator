@@ -7,7 +7,6 @@
     width: 11rem;
     height: 5rem;
     padding: 20px;
-    border: 4px solid black;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;

@@ -94,7 +94,7 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
 
 
     return <>
-        <section className="newCharacterFormContainer">
+        <section className="newCharacterFormContainer box">
             {
                 showCharacterForm ? <>
                     <form className="newCharacterForm">
@@ -111,7 +111,7 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
                                                 (e) => {
                                                     const copy = { ...newCharacter }
                                                     copy.genderId = parseInt(e.target.value)
-                                                    copy.imgURL = `https://avatars.dicebear.com/api/${gender.name}/${Math.random()}.svg`
+                                                    copy.imgURL = `https://avatars.dicebear.com/api/${gender.name.toLowerCase()}/${Math.random()}.svg`
                                                     setNewCharacter(copy)
                                                 }
                                             } /> {gender.name}</label>
