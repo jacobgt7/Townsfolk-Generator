@@ -5,6 +5,9 @@
     justify-content: space-around;
     list-style-type: none;
     align-items: center;
-    border: 4px ridge black;
     margin: 10px;
+}
+
+.navbar__logo {
+    font-family: YeOldPixel;
 }

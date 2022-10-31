@@ -29,7 +29,7 @@ export const NewVillage = ({ getVillages, townsfolkUserObject, setVillages }) =>
 
     }
 
-    return <section className="newVillageForm">
+    return <section className="newVillageForm box">
         {
             displayForm ? <><input type="text" placeholder="Enter village name..." name="name" onChange={handleInput} />
                 <button disabled={!newVillage.name} onClick={handleSaveButton}>Create Village</button></>

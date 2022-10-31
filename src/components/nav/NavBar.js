@@ -3,8 +3,8 @@ import "./NavBar.css"
 
 export const NavBar = () => {
 
-    return <ul className="navbar">
-        <li><h3>Townsfolk Generator</h3></li>
+    return <ul className="navbar box">
+        <li><h2 className="navbar__logo">Townsfolk Generator</h2></li>
         <li>
             <Link className="navbar__link" to="/villages">My Villages</Link>
         </li>

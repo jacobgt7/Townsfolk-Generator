@@ -19,6 +19,14 @@ button {
     letter-spacing: 0.1rem;
     padding: 5px;
     margin: 5px;
+    border: 2px solid black;
+    background-color: #cccccc;
+
+}
+
+.box {
+    background-color: #e6e6ff;
+    border: 4px solid black;
 }
 
 .delete {
@@ -27,4 +35,8 @@ button {
 
 h1 {
     font-family: YeOldPixel;
+}
+
+fieldset {
+    margin-left: 5px;
 }
