@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import { getGenders, getRandomUser, addCharacter, getRandomProfession } from "../ApiManager"
+import { RandomCharacter } from "./RandomCharacter"
+
 
 export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
 
@@ -26,6 +28,7 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
         []
     )
 
+
     const handleUserInputText = (event) => {
         const copy = { ...newCharacter }
         copy[event.target.name] = event.target.value
@@ -47,7 +50,7 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
             randomUserAPI = "https://randomuser.me/api/?nat=US"
         }
 
-        getRandomUser(randomUserAPI)
+        return getRandomUser(randomUserAPI)
             .then((randomUserData) => {
                 const firstName = randomUserData.results[0].name.first
                 const lastName = randomUserData.results[0].name.last
@@ -61,7 +64,7 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
     const handleRandomProfessionButton = (event) => {
         event.preventDefault()
 
-        getRandomProfession()
+        return getRandomProfession()
             .then((professionObj) => {
                 const copy = { ...newCharacter }
                 copy.profession = professionObj.name
@@ -92,6 +95,28 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
 
     }
 
+    const handleCreateRandomCharacter = (event) => {
+        event.preventDefault()
+
+        newCharacter.genderId = Math.ceil(Math.random() * 2)
+        const genderName = genders.find(gender => gender.id === newCharacter.genderId).name
+
+        newCharacter.imgURL = `https://avatars.dicebear.com/api/${genderName.toLowerCase()}/${Math.random()}.svg`
+
+        handleRandomProfessionButton(event)
+            .then(() => {
+
+                return handleRandomNameButton(event)
+            })
+            .then(() => {
+                handleCreateButtonClick(event)
+
+            })
+
+
+
+    }
+
 
     return <>
         <section className="newCharacterFormContainer box">
@@ -104,7 +129,6 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
                                     (gender) => {
                                         return <label key={`genderLabel--${gender.id}`}><input
                                             type="radio"
-                                            required
                                             checked={gender.id === newCharacter.genderId}
                                             value={gender.id}
                                             onChange={
@@ -125,7 +149,6 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
                                 Name
                                 <input
                                     type="text"
-                                    required
                                     id="newCharacterName"
                                     value={newCharacter.name}
                                     name="name"
@@ -150,10 +173,16 @@ export const NewCharacter = ({ villageId, getCharacters, setCharacters }) => {
 
                         <button disabled={!newCharacter.name || !newCharacter.genderId}
                             onClick={handleCreateButtonClick}>Create</button>
+                        <RandomCharacter genders={genders}
+                            setShowCharacterForm={setShowCharacterForm}
+                            villageId={villageId}
+                            setCharacters={setCharacters}
+                        />
                     </form>
                 </>
                     :
                     <button onClick={() => { setShowCharacterForm(true) }}>New Character</button>
+
             }
         </section>
     </>
