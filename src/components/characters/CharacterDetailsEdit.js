@@ -34,7 +34,7 @@ export const CharacterDetailsEdit = ({ genders, editedCharacter, setEditedCharac
                                     (e) => {
                                         const copy = { ...editedCharacter }
                                         copy.genderId = parseInt(e.target.value)
-                                        copy.imgURL = `https://avatars.dicebear.com/api/${gender.name}/${Math.random()}.svg`
+                                        copy.imgURL = `https://avatars.dicebear.com/api/${gender.name.toLowerCase()}/${Math.random()}.svg`
                                         setEditedCharacter(copy)
                                     }
                                 } /> {gender.name}</label>
