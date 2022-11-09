@@ -3,6 +3,7 @@
     justify-content: space-between;
 }
 
+
 .newCharacterFormContainer {
     width: 12rem;
     min-width: 12rem;
@@ -12,6 +13,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+    .newCharacterFormContainer {
+        height: auto;
+    }
+
+    .villageDetailsMainContainer {
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
 .newCharacterForm {

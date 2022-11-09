@@ -9,7 +9,15 @@
 .characterDetailsInnerContainer {
     width: 80%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around
+}
+
+@media screen and (max-width: 800px) {
+    .characterDetailsInnerContainer {
+        flex-direction: column;
+
+    }
 }
 
 .characterDetails__column {
