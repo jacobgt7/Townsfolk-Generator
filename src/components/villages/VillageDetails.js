@@ -24,8 +24,7 @@ export const VillageDetails = () => {
     const [characters, setCharacters] = useState([])
     const [selectedCharacter, setSelectedCharacter] = useState(null)
     const [editName, setEditName] = useState(false)
-
-
+    const mobileDisplay = window.innerWidth < 800
 
 
 
@@ -83,10 +82,13 @@ export const VillageDetails = () => {
 
                 <img className="villageImg" src={villageDetailsPic} alt="pixel art of a village" />
 
-                <CharacterList characters={characters} setSelectedCharacter={setSelectedCharacter} />
+                <CharacterList characters={characters} setSelectedCharacter={setSelectedCharacter} mobileDisplay={mobileDisplay} />
             </div>
 
-            <CharacterInfo selectedCharacter={selectedCharacter} />
+            {
+                mobileDisplay ? <></> : <CharacterInfo selectedCharacter={selectedCharacter} />
+            }
+
         </div>
     </>
 
